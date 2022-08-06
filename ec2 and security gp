@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: ec2 and security group
+Resources: 
+  SampleSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: ec2-group
+      GroupDescription: test user-group
+      VpcId: vpc-06a4f3d424c82f3d8
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+      Tags:
+        - Key: Name
+          Value: preet
+
+  EC2Instance: 
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-051dfed8f67f095f5
+      InstanceType: t2.micro 
+      KeyName: preet
